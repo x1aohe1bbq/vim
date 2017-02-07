@@ -22,7 +22,7 @@ call vundle#begin()
 "Plugin 'gmarik/Vundle.vim'
 
 " Add all your plugins here (note older versions of Vundle used Bundle instead of Plugin)
-"Plugin 'vim-scripts/indentpython.vim'
+Plugin 'vim-scripts/indentpython.vim'
 Plugin 'scrooloose/nerdtree'
 "Plugin 'hdima/python-syntax'
 "plugin 'jistr/vim-nerdtree-tabs'
@@ -62,17 +62,18 @@ map <leader>g  :YcmCompleter GoToDefinitionElseDeclaration<CR>
 "syntax enable
 "let g:syntastic_python_checkers = ['pylint']
 
-if has('gui_running')
-    set background=light
-else
-    set background=dark
-endif
+"if has('gui_running')
+"    set background=light
+"else
+"    set background=dark
+"endif
 
 "colorscheme solarized
 set t_Co=256
 "colors zenburn
 "colorscheme elflord
 colorscheme molokai
+"colorscheme desert
 
 autocmd vimenter * NERDTree 
 " NERDTree config
@@ -95,8 +96,13 @@ augroup vimrc_autocmds
     autocmd FileType python set nowrap
     augroup END
 
+" ======= 恢复上次文件打开位置 ======= "  
+set viminfo='10,\"100,:20,%,n~/.viminfo
+au BufReadPost * if line("'\"") > 0|if line("'\"") <= line("$")|exe("norm '\"")|else|exe "norm $"|endif|endif
+
 let g:pymode_run = 1
 let g:pymode_run_bind = '<leader>r'
 let g:airline#extensions#tabline#enabled = 1
 "let g:airline#extensions#tabline#left_sep = ' '
 "let g:airline#extensions#tabline#left_alt_sep = '|'
+
